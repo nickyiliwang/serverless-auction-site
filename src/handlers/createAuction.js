@@ -15,16 +15,12 @@ async function createAuction(event, context) {
   };
 
   // Waiting for the put action to finish, and return a promise, await the promise to finish then return.
-  const putObjectPromise = await dynamodb
+  await dynamodb
     .put({
       TableName: process.env.AUCTIONS_TABLE_NAME,
       Item: auction,
     })
     .promise();
-
-  await putObjectPromise.then((data) => {
-    auction.status = "HAHAHAHAAHAHA";
-  });
 
   return {
     statusCode: 201,
