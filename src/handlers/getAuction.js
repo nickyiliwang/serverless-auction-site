@@ -1,11 +1,5 @@
 import AWS from "aws-sdk";
-// before common middleware
-import middy from "@middy/core";
-// no need for JSON.parse, auto json parse
-import httpJsonBodyParser from "@middy/http-json-body-parser";
-// Normalizer, prevents throwing error if no prop, just shows undefined
-import httpEventNormalizer from "@middy/http-event-normalizer";
-import httpErrorHandler from "@middy/http-error-handler";
+import commonMiddleware from "../lib/commonMiddleware";
 import createError from "http-errors";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
@@ -38,8 +32,4 @@ async function getAuction(event, context) {
   };
 }
 
-// using middy here
-export const handler = middy(getAuction)
-  .use(httpJsonBodyParser())
-  .use(httpEventNormalizer())
-  .use(httpErrorHandler());
+export const handler = commonMiddleware(getAuction);
