@@ -22,7 +22,7 @@ async function getAuction(event, context) {
       })
       .promise();
 
-    auction = result.item;
+    auction = result.Item;
   } catch (error) {
     console.log(error);
     throw new createError.InternalServerError(error);
