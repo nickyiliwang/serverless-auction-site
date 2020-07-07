@@ -14,6 +14,9 @@ async function createAuction(event, context) {
     title,
     status: "OPEN",
     createdAt: now.toISOString(),
+    highestBid: {
+      amount: 0,
+    },
   };
   try {
     // Waiting for the put action to finish, and return a promise, await the promise to finish then return/ for error handling
@@ -24,7 +27,7 @@ async function createAuction(event, context) {
       })
       .promise();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw new createError.InternalServerError(error);
   }
 

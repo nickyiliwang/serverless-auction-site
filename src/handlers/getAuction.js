@@ -18,7 +18,7 @@ async function getAuction(event, context) {
 
     auction = result.Item;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw new createError.InternalServerError(error);
   }
 
