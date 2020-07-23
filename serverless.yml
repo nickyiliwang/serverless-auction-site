@@ -58,9 +58,9 @@ functions:
 
   processAuctions:
     handler: src/handlers/processAuctions.handler
-    # events:
-    #   - eventBridge:
-    #     schedule: rate(1 minute)
+    events:
+      - eventBridge:
+        schedule: rate(30 minutes)
 
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
