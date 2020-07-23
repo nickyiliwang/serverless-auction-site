@@ -9,6 +9,8 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 async function createAuction(event, context) {
   const { title } = event.body;
+  // get authorizer email prop, from 
+  const { email } = event.requestContext.authorizer;
   const now = new Date();
   const endDate = new Date();
   endDate.setHours(now.getHours() + 1);
@@ -22,6 +24,7 @@ async function createAuction(event, context) {
     highestBid: {
       amount: 0,
     },
+    seller: email,
   };
   try {
     // Waiting for the put action to finish, and return a promise, await the promise to finish then return/ for error handling
