@@ -1,3 +1,4 @@
+# pictures expires and deletes in one day, from Life cycle policy
 AuctionsBucket:
   Type: AWS::S3::Bucket
   Properties:
@@ -8,6 +9,7 @@ AuctionsBucket:
           Status: Enabled
           ExpirationInDays: 1
 
+# Making this bucket public
 AuctionsBucketPolicy:
   Type: AWS::S3::BucketPolicy
   Properties:

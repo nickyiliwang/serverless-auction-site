@@ -1,3 +1,4 @@
+# Explicit Allow put object on all sub directory in resource defined
 AuctionsBucketIAM:
   Effect: Allow
   Action:

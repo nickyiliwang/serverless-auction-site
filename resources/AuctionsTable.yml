@@ -1,9 +1,13 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+
 AuctionsTable:
   Type: AWS::DynamoDB::Table
   Properties:
     # having the table name referencing prod or dev stage from the serverless.yml(self) file
     TableName: AuctionsTable-${self:provider.stage}
+    # On-Demand Mode
     BillingMode: PAY_PER_REQUEST
+    # A list of attributes that describe the key schema for the table and indexes.
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
@@ -14,6 +18,7 @@ AuctionsTable:
     KeySchema:
       - AttributeName: id
         KeyType: HASH
+    # Global secondary indexes to be created on the table. Can create up to 20 global secondary indexes.
     GlobalSecondaryIndexes:
       - IndexName: statusAndEndDate
         KeySchema:
@@ -21,5 +26,6 @@ AuctionsTable:
             KeyType: HASH
           - AttributeName: endingAt
             KeyType: RANGE
+        # All of the table attributes are projected into the index.
         Projection:
           ProjectionType: ALL
