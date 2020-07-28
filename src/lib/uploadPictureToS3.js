@@ -3,7 +3,7 @@ import AWS from "aws-sdk";
 const s3 = new AWS.S3();
 
 export async function uploadPictureToS3(key, body) {
-  await s3
+  const result = await s3
     .upload({
       Bucket: process.env.AUCTIONS_BUCKET_NAME,
       Key: key,
@@ -12,4 +12,6 @@ export async function uploadPictureToS3(key, body) {
       ContentType: "image/jpeg",
     })
     .promise();
+
+  return result.Location;
 }
