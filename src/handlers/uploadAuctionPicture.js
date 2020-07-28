@@ -6,6 +6,7 @@ import { uploadPictureToS3 } from "../lib/uploadPictureToS3";
 import AWS from "aws-sdk";
 import schema from "../lib/schemas/uploadAuctionPictureSchema";
 import validator from "@middy/validator";
+import cors from "@middy/http-cors";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -55,4 +56,5 @@ export async function uploadAuctionPicture(event) {
 
 export const handler = middy(uploadAuctionPicture)
   .use(httpErrorHandler())
-  .use(validator({ inputSchema: schema }));
+  .use(validator({ inputSchema: schema }))
+  .use(cors());
